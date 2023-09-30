@@ -8,13 +8,8 @@
             <td>${ page.getUser().getEmail()} </td>
         </tr>
         <tr>
-            <td>${ page.getUser().getFirstName() } </td>
+            <td>${ page.getUser().getFirstName() } ${ page.getUser().getLastName() }</td>
         </tr>
-        <tr>
-            <td>${ page.getUser().getLastName() } </td>
-        </tr>
-
-
     </table>`
 ,footer = @`<a>here is a footer</a>`
 
