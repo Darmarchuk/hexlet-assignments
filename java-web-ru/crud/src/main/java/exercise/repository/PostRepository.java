@@ -1,10 +1,9 @@
 package exercise.repository;
 
-import java.util.List;
-
 import exercise.model.Post;
 import exercise.util.Generator;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

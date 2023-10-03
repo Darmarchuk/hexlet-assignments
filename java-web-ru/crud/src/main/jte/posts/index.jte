@@ -16,16 +16,16 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            @if(page.getPageNum()>0)
-            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsByPage(page.getPageNum()-1)}">Previous</a></li>
+            @if(page.getPageNum()>1)
+            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsPath()}?page=${page.getPageNum()-1}">Previous</a></li>
             @endif
-            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsByPage(1)}">1</a></li>
+            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsPath()}?page=1">1</a></li>
             <li class="page-item active" aria-current="page">
                 <span class="page-link">${page.getPageNum()}</span>
             </li>
             @if(page.getPosts().size()>0)
-            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsByPage(page.getPageNum()+1)}">Next</a></li>
-            @endif
+            <li class="page-item"><a class="page-link" href="${NamedRoutes.postsPath()}?page=${page.getPageNum()+1}">Next</a></li>
+            @endif;
         </ul>
     </nav>
 `)
