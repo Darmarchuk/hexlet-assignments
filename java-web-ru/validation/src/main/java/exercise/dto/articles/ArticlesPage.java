@@ -10,4 +10,5 @@ import lombok.Getter;
 @Getter
 public class ArticlesPage {
     private List<Article> articles;
+
 }
