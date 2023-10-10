@@ -1,12 +1,7 @@
 package exercise.controller;
 
-import exercise.dto.PostCreateDTO;
-import exercise.dto.PostListDTO;
-import exercise.mapper.CommentMapper;
-import exercise.mapper.PostMapper;
 import exercise.model.Comment;
 import exercise.repository.CommentRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,33 +23,14 @@ public class PostsController {
 
     @Autowired CommentRepository commentRepository;
 
-    @Autowired
-    PostMapper postMapper;
-    @Autowired
-    CommentMapper commentMapper;
-
     @GetMapping
-    List<PostListDTO>show(){
-        return   postRepository.findAll().stream().map(p->postMapper.put(p)).collect(Collectors.toList());
+    List<CommentDTO>show(){
+        return  toPostDTO( postRepository.findAll());
     }
 
     @GetMapping("/{id}")
     PostDTO showById(@PathVariable Long id){
         return mapPostDTO(id);
-    }
-
-    @PostMapping
-    PostDTO create(@Valid @RequestBody PostCreateDTO postDTO){
-        Post post= postMapper.put(postDTO);
-        postRepository.save(post);
-        return  postMapper.put(post,null);
-    }
-
-    @PutMapping("/{id}")
-    PostDTO update(@PathVariable Long id,@Valid @RequestBody PostDTO post ){
-        Post updPost=postMapper.put(post);
-        PostDTO u=postMapper.put(postRepository.save(updPost),null);
-        return  mapPostDTO(id);
     }
 
     List<CommentDTO> toPostDTO(List<Post> posts){
@@ -65,10 +41,14 @@ public class PostsController {
 
     PostDTO mapPostDTO(Long id){
         Post post=postRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post with id "+id+" not found") );
-        List<CommentDTO> commentDTOS=commentRepository.findByPostId(id)
-                .stream().map(c->commentMapper.map(c)).collect(Collectors.toList());
-        PostDTO postDTO=postMapper.put(post,commentDTOS);
-        return postDTO;
+        List<Comment> comment = commentRepository.findByPostId(id);
+        List<CommentDTO> commentDTOS=comment.stream().map(c->new CommentDTO( c.getId(),c.getBody())).toList();
+        PostDTO dto=new PostDTO();
+        dto.setComments(commentDTOS);
+        dto.setId(post.getId());
+        dto.setBody(post.getBody());
+        dto.setTitle(post.getTitle());
+        return dto;
     }
 
 

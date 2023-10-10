@@ -1,10 +1,10 @@
 package exercise.repository;
 
-import exercise.model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AuthorRepository extends JpaRepository<Author,Long> {
+import exercise.model.Contact;
 
+@Repository
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 }
