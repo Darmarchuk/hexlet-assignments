@@ -3,6 +3,7 @@
 spring:
   jpa:
     show-sql: true
+    generate-ddl: true
   output:
     ansi:
       enabled: always
