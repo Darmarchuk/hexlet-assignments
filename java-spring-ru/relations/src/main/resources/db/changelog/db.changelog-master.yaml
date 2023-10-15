@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/createCategory.yaml
+  - include:
+     file: db/changelog/changeset/createArticle.yaml
+  - include:
+      file: /import.sql

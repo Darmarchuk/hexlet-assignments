@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:5001}
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  datasource:
+    url: jdbc:h2:./hexlet
+    username:
+    password:
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2console/
+      settings:
+        web-allow-others: true
