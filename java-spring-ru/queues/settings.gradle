@@ -1,4 +1,0 @@
-rootProject.name = 'queue'
-
-includeBuild 'consumer'
-includeBuild 'producer'
