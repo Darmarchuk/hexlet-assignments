@@ -28,5 +28,6 @@ public class AuthorDTO {
     @Email
     private String email;
 
-    private List<PostDTO> posts;
+    private List<AuthorPostsDTO> posts;
+
 }

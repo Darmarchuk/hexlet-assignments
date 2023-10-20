@@ -7,7 +7,7 @@
 // // Обернём в прокси
 // // Метод newProxyInstance() создает новый экземпляр прокси
 // // На вход принимает getClassLoader для класса, массив реализуемых интерфейсов и обработчик вызова
-// MyInterface proxyInstance = Proxy.newProxyInstance(
+// MyInterface proxyInstance = (MyInterface) Proxy.newProxyInstance(
 //     MyClass.class.getClassLoader(),
 //     MyClass.class.getInterfaces(),
 //     // Лямбда - обработчик вызова

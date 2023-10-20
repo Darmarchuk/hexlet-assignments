@@ -9,22 +9,31 @@ import exercise.model.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
 @Mapper(
+        uses = {JsonNullableMapper.class, ReferenceMapper.class },
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class PostMapper {
-    public abstract PostDTO put(Post map , List<CommentDTO> comments);
-    public abstract PostListDTO put(Post map );
-    public abstract Post put(PostDTO post);
+
+    @Mapping(source = "postAuthor.authorId", target = "authorId")
+    public abstract PostDTO put(Post post );
+
+    @Mapping(source = "postAuthor.authorId", target = "authorId")
+    public abstract List<PostDTO> put(List<Post> map);
+
+    @Mapping(source = "authorId", target = "postAuthor.authorId")
+    public abstract Post put(PostDTO postDTO, @MappingTarget Post post);
 
     @Mapping(target = "id",ignore = true)
+    @Mapping(source = "authorId", target = "postAuthor.authorId")
     public abstract Post put(PostCreateDTO post);
 
 }

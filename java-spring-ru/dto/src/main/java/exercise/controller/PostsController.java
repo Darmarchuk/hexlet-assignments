@@ -34,8 +34,8 @@ public class PostsController {
     CommentMapper commentMapper;
 
     @GetMapping
-    List<PostListDTO>show(){
-        return   postRepository.findAll().stream().map(p->postMapper.put(p)).collect(Collectors.toList());
+    List<PostDTO>show(){
+        return   postMapper.put( postRepository.findAll() );
     }
 
     @GetMapping("/{id}")
@@ -47,13 +47,15 @@ public class PostsController {
     PostDTO create(@Valid @RequestBody PostCreateDTO postDTO){
         Post post= postMapper.put(postDTO);
         postRepository.save(post);
-        return  postMapper.put(post,null);
+        return  postMapper.put(post);
     }
 
     @PutMapping("/{id}")
-    PostDTO update(@PathVariable Long id,@Valid @RequestBody PostDTO post ){
-        Post updPost=postMapper.put(post);
-        PostDTO u=postMapper.put(postRepository.save(updPost),null);
+    PostDTO update(@PathVariable Long id,@Valid @RequestBody PostDTO postDTO ){
+        Post post=postRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post with "+id+" not found") );
+        Post updPost=postMapper.put(postDTO,post);
+        postRepository.save(updPost);
+        PostDTO u=postMapper.put(updPost);
         return  mapPostDTO(id);
     }
 
@@ -67,7 +69,7 @@ public class PostsController {
         Post post=postRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post with id "+id+" not found") );
         List<CommentDTO> commentDTOS=commentRepository.findByPostId(id)
                 .stream().map(c->commentMapper.map(c)).collect(Collectors.toList());
-        PostDTO postDTO=postMapper.put(post,commentDTOS);
+        PostDTO postDTO=postMapper.put(post);
         return postDTO;
     }
 

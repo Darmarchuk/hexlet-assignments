@@ -1,5 +1,6 @@
 package exercise.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostListDTO {
-    Long id;
-    String title;
-    String body;
+    private Long id;
+
+    private String title;
+
+    private String body;
+
+    private Long authorId;
 }

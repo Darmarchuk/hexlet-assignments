@@ -1,4 +1,4 @@
-insert into author (author_id, first_Name, last_Name,email) values (1, 'Dmirty', 'Armarchuk','mail@author.ru');
+insert into author (author_id, first_Name, last_Name,email) values (1, 'Dmitry', 'Armarchuk','mail@author.ru');
 
 
 insert into posts (id, title, body,author_id) values (1, 'Post Title 1', 'Post Body 1',1);

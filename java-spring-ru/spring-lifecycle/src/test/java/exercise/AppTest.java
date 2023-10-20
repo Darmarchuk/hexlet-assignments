@@ -66,3 +66,4 @@ public class AppTest {
         assertThat(ctx.getBean(Daytime.class)).isInstanceOf(currentDaytime.getClass());
     }
 }
+

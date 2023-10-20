@@ -2,8 +2,11 @@ package exercise.model;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.EntityListeners;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 import lombok.Getter;
@@ -24,6 +27,8 @@ public class Comment {
     @GeneratedValue(strategy = IDENTITY)
     private long id;
 
-    private long postId;
+    @ManyToOne
+    private Post post;
+
     private String body;
 }

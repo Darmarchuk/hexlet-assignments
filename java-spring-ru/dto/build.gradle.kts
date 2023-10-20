@@ -34,6 +34,7 @@ dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+    implementation("org.openapitools:jackson-databind-nullable:0.2.6")
 }
 
 tasks.test {

@@ -20,3 +20,4 @@ public abstract class  ReferenceMapper {
         return id != null ? entityManager.find(entityClass, id) : null;
     }
 }
+
